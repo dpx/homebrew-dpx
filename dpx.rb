@@ -5,31 +5,51 @@
 class Dpx < Formula
   desc "Run any executable inside container on your machine"
   homepage "https://github.com/dpx/dpx"
-  version "0.1.1"
-  bottle :unneeded
+  version "0.1.2"
 
-  if OS.mac? && Hardware::CPU.intel?
-    url "https://github.com/dpx/dpx/releases/download/v0.1.1/dpx_0.1.1_macOS_x86_64.tar.gz"
-    sha256 "5b08d557c72977021f42b5bbea54c7fefa1c346f11b83e733318cf337beb5959"
-  end
-  if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/dpx/dpx/releases/download/v0.1.1/dpx_0.1.1_macOS_arm64.tar.gz"
-    sha256 "66e734534dd5592c9e4c40d7999518502eb228860c504e50667337f0cdd7a77d"
-  end
-  if OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/dpx/dpx/releases/download/v0.1.1/dpx_0.1.1_linux_x86_64.tar.gz"
-    sha256 "d9e83769ead0716bb02f773de094fd874cf69b51c7ab5fdeb8f0ed203f6a152e"
-  end
-  if OS.linux? && Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
-    url "https://github.com/dpx/dpx/releases/download/v0.1.1/dpx_0.1.1_linux_armv6.tar.gz"
-    sha256 "f86f27f87f7c08dc3956e1626d6041a03072678309692572f9bb14492f061dd4"
-  end
-  if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-    url "https://github.com/dpx/dpx/releases/download/v0.1.1/dpx_0.1.1_linux_arm64.tar.gz"
-    sha256 "4e6e215d93a89468120cee458cd71ca5784a661ab9c04c0adb02384b26feb223"
+  on_macos do
+    if Hardware::CPU.arm?
+      url "https://github.com/dpx/dpx/releases/download/v0.1.2/dpx_0.1.2_macOS_arm64.tar.gz"
+      sha256 "8fa37b50b8b21cd0b817ce4b443306cf142fa5e227f86af112b3511eb3cd78b0"
+
+      def install
+        bin.install "dpx"
+      end
+    end
+    if Hardware::CPU.intel?
+      url "https://github.com/dpx/dpx/releases/download/v0.1.2/dpx_0.1.2_macOS_x86_64.tar.gz"
+      sha256 "dbd8f3b4ee55c30ba796031cb01e7939e23b7af37bc5a09ec6197f41fa85c0e0"
+
+      def install
+        bin.install "dpx"
+      end
+    end
   end
 
-  def install
-    bin.install "dpx"
+  on_linux do
+    if Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
+      url "https://github.com/dpx/dpx/releases/download/v0.1.2/dpx_0.1.2_linux_armv6.tar.gz"
+      sha256 "35d214dcd09a3f40331818995a1992b03e156e7789a287f16e67f8d27d1d4fd9"
+
+      def install
+        bin.install "dpx"
+      end
+    end
+    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+      url "https://github.com/dpx/dpx/releases/download/v0.1.2/dpx_0.1.2_linux_arm64.tar.gz"
+      sha256 "121945d817f197813aac501b3d6b643f95a0021964d5845d70015f97d2e5293d"
+
+      def install
+        bin.install "dpx"
+      end
+    end
+    if Hardware::CPU.intel?
+      url "https://github.com/dpx/dpx/releases/download/v0.1.2/dpx_0.1.2_linux_x86_64.tar.gz"
+      sha256 "6b1855fb624cf57a23a01f20067db37d08fc9afa1c9505268e0b45c3b04b854d"
+
+      def install
+        bin.install "dpx"
+      end
+    end
   end
 end
